@@ -1,3 +1,5 @@
+print('Script init')
+
 ## Imports and Setup
 import requests
 import pandas as pd
@@ -9,7 +11,7 @@ from access_tokens import get_access_token
 from query_spotify import get_artists
 
 CHUNK_SIZE = 50 # artists per query
-QUERY_DELAY = 5 # seconds
+QUERY_DELAY = 240 # 6 mins in seconds
 
 ## Function to break ids into chunks
 def chunk_list(lst, n):
@@ -43,3 +45,5 @@ for i,ids in enumerate(artist_chunks):
 
     print(f'Finished chunk {i} of {len(artists.artist_id.values) // CHUNK_SIZE + 1}')
     time.sleep(QUERY_DELAY)
+
+print('Script complete')
