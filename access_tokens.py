@@ -1,3 +1,4 @@
+import os
 import requests
 import json
 import datetime
@@ -48,27 +49,37 @@ def get_new_access_token(client_id, client_secret, timeout=60, retries=3):
     
 def get_access_token(client_id, client_secret, timeout=60, retries=3):
     token_file_path = f'{DATA_DIR}/access_token.json'
-    try:
-        with open(token_file_path, 'r') as token_file:
-            data = json.load(token_file)
 
-        ## If token expires in the next 2 minutes, get new token
-        if data['expire_date'] < datetime.datetime.now().timestamp() + 120:
-            ## Get new token and write to file
-            print('Token expired. Getting new token...')
-            response = get_new_access_token(
+    def get_write_token():
+        response = get_new_access_token(
                 client_id = client_id, 
                 client_secret = client_secret,
                 timeout = timeout,
                 retries = retries)
 
-            with open(token_file_path, 'w') as token_file:
+        with open(token_file_path, 'w') as token_file:
                 json.dump(response, token_file)
 
-            return response['access_token']
-        else:
-            ## Otherwise, get existing token
-            print('Using existing token...')
-            return data['access_token']
-    except FileNotFoundError:
-        print(f'{token_file_path} not found.')
+        return response['access_token']
+
+    ## Check if token file exists
+    if not os.path.exists(token_file_path):
+        print(f'{token_file_path} not found. Creating file and getting new token...')
+        return get_write_token()
+    else:
+        try:
+            with open(token_file_path, 'r') as token_file:
+                data = json.load(token_file)
+
+            ## If token expires in the next 2 minutes, get new token
+            if data['expire_date'] < datetime.datetime.now().timestamp() + 120:
+                ## Get new token and write to file
+                print('Token expired. Getting new token...')
+                return get_write_token()
+            else:
+                ## Otherwise, get existing token
+                print('Using existing token...')
+                return data['access_token']
+        except FileNotFoundError:
+            print(f'{token_file_path} not found.')
+
