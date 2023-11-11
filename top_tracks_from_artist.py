@@ -1,3 +1,6 @@
+print('Script init')
+
+## Imports and Setup
 import time
 import pandas as pd
 
@@ -51,3 +54,5 @@ for i,artist_id in enumerate(artist_ids):
 
     print(f'Finished chunk {i+1} of {len(artist_ids)}')
     time.sleep(QUERY_DELAY)
+
+print('Script complete')
