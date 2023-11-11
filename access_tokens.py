@@ -1,6 +1,7 @@
 import requests
 import json
 import datetime
+from constants import DATA_DIR
         
 def get_new_access_token(client_id, client_secret, timeout=60, retries=3):
     ## Define API endpoint and data
@@ -46,7 +47,7 @@ def get_new_access_token(client_id, client_secret, timeout=60, retries=3):
     return None
     
 def get_access_token(client_id, client_secret, timeout=60, retries=3):
-    token_file_path = 'access_token.json'
+    token_file_path = f'{DATA_DIR}/access_token.json'
     try:
         with open(token_file_path, 'r') as token_file:
             data = json.load(token_file)

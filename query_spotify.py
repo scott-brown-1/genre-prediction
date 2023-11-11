@@ -1,7 +1,7 @@
 import requests
 from constants import ARTISTS_ENDPOINT
 
-## Rewrite query_spotify, but handle timeout errors
+## Base API querying function for others to build on
 def query_spotify(endpoint, access_token, timeout=60, retries=3):
     headers = {
         'Authorization': f'Bearer {access_token}'
@@ -41,19 +41,19 @@ def get_artists(artist_ids, access_token):
     artist_data = query_spotify(endpoint, access_token=access_token)    
     return artist_data
 
-def get_album_data(artist_id, access_token, limit=10):
-   ## Define artist data endpoint
-   endpoint = f'{ARTISTS_ENDPOINT}{artist_id}/albums?limit={limit}'
-   print('Getting album data...')
-   
-   album_data = query_spotify(endpoint, access_token=access_token)
-   return album_data
+def get_artist_top_tracks(artist_id, access_token, market='US'):
+    ## Define artist data endpoint
+    endpoint = f'{ARTISTS_ENDPOINT}/{artist_id}/top-tracks?market={market}'
+    print(endpoint)
+    print('Getting track data...')
 
-def get_track_data(artist_id, access_token, market='US'):
-   ## Define artist data endpoint
-   endpoint = f'{ARTISTS_ENDPOINT}{artist_id}/top-tracks?market={market}'
+    track_data = query_spotify(endpoint, access_token=access_token)
+    return track_data
 
-   print('Getting track data...')
-   
-   track_data = query_spotify(endpoint, access_token=access_token)
-   return track_data
+def get_artist_albums(artist_id, access_token, limit=10):
+    ## Define artist data endpoint
+    endpoint = f'{ARTISTS_ENDPOINT}{artist_id}/albums?limit={limit}'
+    print('Getting album data...')
+
+    album_data = query_spotify(endpoint, access_token=access_token)
+    return album_data
