@@ -161,4 +161,4 @@ cython_debug/
 
 # Temporary
 credentials.py
-./data/access_token.json
+data/access_token.json
