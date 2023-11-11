@@ -1,3 +1,5 @@
+print('Script init')
+
 ## Imports and Setup
 import requests
 import pandas as pd
@@ -10,7 +12,7 @@ from query_spotify import get_artists
 from utils import chunk_list
 
 CHUNK_SIZE = 50 # artists per query
-QUERY_DELAY = 5 # seconds
+QUERY_DELAY = 240 # 6 mins in seconds
 
 ## Get artist ids
 artists = pd.read_csv(f'{DATA_DIR}/artists.csv')
@@ -45,3 +47,5 @@ for i,ids in enumerate(artist_chunks):
 
     print(f'Finished chunk {i} of {len(artists.artist_id.values) // CHUNK_SIZE + 1}')
     time.sleep(QUERY_DELAY)
+
+print('Script complete')
