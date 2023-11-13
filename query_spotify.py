@@ -1,5 +1,5 @@
 import requests
-from constants import ARTISTS_ENDPOINT
+from constants import ARTISTS_ENDPOINT, AUDIO_FEATURES_ENDPOINT
 
 ## Base API querying function for others to build on
 def query_spotify(endpoint, access_token, timeout=60, retries=3):
@@ -57,3 +57,16 @@ def get_artist_albums(artist_id, access_token, limit=10):
 
     album_data = query_spotify(endpoint, access_token=access_token)
     return album_data
+
+
+def get_tracks_audio_features(track_ids, access_token):
+    ## Define audio feature endpoint
+    # Changes if querying one or multiple tracks 
+    endpoint = (f'{AUDIO_FEATURES_ENDPOINT}/{track_ids}' if isinstance(track_ids, str) 
+                else f'{AUDIO_FEATURES_ENDPOINT}?ids={",".join(track_ids)}')
+
+    print(endpoint)
+    print('Getting audio feature data...')
+
+    audio_data = query_spotify(endpoint, access_token=access_token)    
+    return audio_data
