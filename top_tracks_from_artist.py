@@ -28,9 +28,7 @@ for i,artist_id in enumerate(artist_ids):
     track_res = get_artist_top_tracks(artist_id=artist_id, access_token=token, market=MARKET)
     if(track_res is None):
         print(f'Error getting artist {artist_id}')
-        continue
-
-    print(track_res)
+        continue	
 
     ## Clean response into dictionary
     track_res_clean = {
