@@ -1,3 +1,4 @@
+track_id,track_name,artist_id,artist_name,release_date,release_date_precision,album_len,duration_ms,explicit,track_popularity
 1BxfuPKGuaTgP7aM0Bbdwr,Cruel Summer,06HL4z0CvFAxyc27GXpf02,Taylor Swift,2019-08-23,day,18,178426,False,99
 1Iq8oo9XkmmvCQiGOfORiz,Is It Over Now? (Taylor's Version) (From The Vault),06HL4z0CvFAxyc27GXpf02,Taylor Swift,2023-10-26,day,21,229477,False,94
 5KD6AEm19QnMbfWpfoOHMl,Now That We Don't Talk (Taylor's Version) (From The Vault),06HL4z0CvFAxyc27GXpf02,Taylor Swift,2023-10-26,day,21,146436,False,92

@@ -43,7 +43,9 @@ for i,ids in enumerate(artist_chunks):
     print('Writing data to CSV...')
     artist_data = pd.DataFrame.from_dict(artist_res_clean)
     artist_data.columns = artist_res_clean.keys()
-    artist_data.to_csv(f'{DATA_DIR}/artist_data.csv', mode='a', index=False)
+
+    keep_header = True if i == 0 else False
+    artist_data.to_csv(f'{DATA_DIR}/artist_data.csv', mode='a', header=keep_header, index=False)
 
     print(f'Finished chunk {i} of {len(artists.artist_id.values) // CHUNK_SIZE + 1}')
     time.sleep(QUERY_DELAY)
