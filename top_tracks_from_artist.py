@@ -49,7 +49,7 @@ for i,artist_id in enumerate(artist_ids):
     track_data = pd.DataFrame.from_dict(track_res_clean)
     track_data.columns = track_res_clean.keys()
 
-    keep_header = True if i == 0 else False
+    keep_header = i == 0
     track_data.to_csv(f'{DATA_DIR}/track_data.csv', mode='a', header=keep_header, index=False)
 
     print(f'Finished chunk {i+1} of {len(artist_ids)}')

@@ -44,7 +44,7 @@ for i,ids in enumerate(artist_chunks):
     artist_data = pd.DataFrame.from_dict(artist_res_clean)
     artist_data.columns = artist_res_clean.keys()
 
-    keep_header = True if i == 0 else False
+    keep_header = i == 0
     artist_data.to_csv(f'{DATA_DIR}/artist_data.csv', mode='a', header=keep_header, index=False)
 
     print(f'Finished chunk {i} of {len(artists.artist_id.values) // CHUNK_SIZE + 1}')

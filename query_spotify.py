@@ -58,7 +58,6 @@ def get_artist_albums(artist_id, access_token, limit=10):
     album_data = query_spotify(endpoint, access_token=access_token)
     return album_data
 
-
 def get_tracks_audio_features(track_ids, access_token):
     ## Define audio feature endpoint
     # Changes if querying one or multiple tracks 

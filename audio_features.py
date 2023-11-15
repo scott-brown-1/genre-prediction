@@ -52,7 +52,7 @@ for i,ids in enumerate(track_chunks):
     audio_data = pd.DataFrame.from_dict(audio_res_clean)
     audio_data.columns = audio_res_clean.keys()
 
-    keep_header = True if i == 0 else False
+    keep_header = i == 0
     audio_data.to_csv(f'{DATA_DIR}/audio_feature_data.csv', mode='a', header=keep_header, index=False)
 
     print(f'Finished chunk {i+1} of {n_chunks+1}')
