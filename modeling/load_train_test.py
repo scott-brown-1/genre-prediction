@@ -4,10 +4,11 @@
 
 import warnings
 import pandas as pd
-from constants import DATA_DIR, DROP_COLS
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+
+from constants import DATA_DIR, DROP_COLS
 
 TARGET = 'Genre'
 
@@ -38,12 +39,10 @@ def load_train_test(single_prediction=True, scale=False):
 
     if(single_prediction):
         y_train = y_train.str.findall(r"'(.*?)'").apply(lambda x: x[0])
-        y_test = y_test.str.findall(r"'(.*?)'").apply(lambda x: x[0])
     else:
         warnings.warn('Multi-label classification not yet supported. Returning single-label data.')
         y_train = y_train.str.findall(r"'(.*?)'").apply(lambda x: x[0])
-        y_test = y_test.str.findall(r"'(.*?)'").apply(lambda x: x[0])
-
+        
     return X_train, X_test, y_train, y_test
 
     
