@@ -14,4 +14,4 @@ def predict_and_evaluate(model, new_data, truth_data, multilabel=False):
         accuracy = accuracy_score(truth_data, y_pred)
 
     #print(accuracy)
-    return y_pred
+    return pd.DataFrame(y_pred, columns=model.classes_)
