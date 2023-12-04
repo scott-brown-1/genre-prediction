@@ -1,5 +1,7 @@
 import warnings
 import pandas as pd
+import numpy as np
+
 from sklearn.metrics import accuracy_score
 
 def predict_and_evaluate(model, new_data, truth_data):
@@ -8,7 +10,8 @@ def predict_and_evaluate(model, new_data, truth_data):
     y_prob = pd.DataFrame(model.predict_proba(new_data), columns=model.classes_)
 
     ## Calculate accuracy of predicting top genre
-    top_genre_accuracy = accuracy_score(truth_data.apply(lambda x: x[0]), y_pred)
+    top_genre_accuracy = np.array([y_pred.loc[i,:].isin(r) for i,r in enumerate(truth_data)]).sum() / len(truth_data)
+    #accuracy_score(truth_data.apply(lambda x: x[0]), y_pred)
     print(f'Top genre accuracy: {top_genre_accuracy}')
 
     ## Calculate accuracy of predicting all genres
